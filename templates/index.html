@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty Information System</title>
+</head>
+<body>
+  <main>
+    <h1>Faculty Information System</h1>
+    <p>Use the REST API or interactive documentation at <a href="/docs">/docs</a>.</p>
+    <section>
+      <h2>Faculty Records</h2>
+      <table>
+        <thead><tr><th>Faculty ID</th><th>Name</th><th>Email</th><th>Department</th><th>Status</th></tr></thead>
+        <tbody id="faculty-table-body"></tbody>
+      </table>
+    </section>
+  </main>
+  <script>
+    fetch('/api/faculties').then(response => response.json()).then(faculties => {
+      document.getElementById('faculty-table-body').innerHTML = faculties.map(faculty =>
+        `<tr><td>${faculty.faculty_id}</td><td>${faculty.full_name}</td><td>${faculty.email}</td><td>${faculty.department_id}</td><td>${faculty.status}</td></tr>`
+      ).join('');
+    });
+  </script>
+</body>
+</html>
